@@ -22,11 +22,11 @@ class ReviewController extends AbstractController
         $search = $request->query->getString('search') ?: null;
         $page = max(1, $request->query->getInt('page', 1));
 
-        $paginator = $this->repository->findPaginatedList($page, self::REVIEWS_PER_PAGE, $search);
-        $totalPages = (int) ceil(count($paginator) / self::REVIEWS_PER_PAGE);
+        $reviews = $this->repository->findPaginatedList($page, self::REVIEWS_PER_PAGE, $search);
+        $totalPages = (int) ceil(count($reviews) / self::REVIEWS_PER_PAGE);
 
         return $this->render('review/index.html.twig', [
-            'reviews' => $paginator,
+            'reviews' => $reviews,
             'search' => $search ?? '',
             'currentPage' => $page,
             'totalPages' => $totalPages,
@@ -36,7 +36,7 @@ class ReviewController extends AbstractController
     #[Route('/review/{id}/details', name: 'review_details', methods: ['GET'])]
     public function details(int $id): Response
     {
-        $review = $this->repository->find($id) ?? throw $this->createNotFoundException('A vélemény nem található.');
+        $review = $this->repository->find($id);
 
         return $this->render('review/details.html.twig', [
             'review' => $review,
