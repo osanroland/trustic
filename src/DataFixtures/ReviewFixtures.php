@@ -15,7 +15,7 @@ class ReviewFixtures extends Fixture
 
         $companies = ['Apple', 'Google', 'Tesla', 'Amazon', 'Microsoft'];
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 15; ++$i) {
             $review = new Review();
             $review->setCompanyName($companies[array_rand($companies)]);
             $review->setRating(random_int(1, 5));

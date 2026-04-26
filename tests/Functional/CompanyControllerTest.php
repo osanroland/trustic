@@ -37,7 +37,7 @@ class CompanyControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         $companyNames = $crawler->filter('table tbody tr td:first-child')->each(
-            fn($node) => $node->text()
+            fn ($node) => $node->text()
         );
 
         $this->assertSame(['Google', 'Apple', 'Tesla'], $companyNames);
@@ -63,7 +63,7 @@ class CompanyControllerTest extends WebTestCase
         $review->setCompanyName($companyName);
         $review->setRating($rating);
         $review->setReviewText('Tesztvélemény');
-        $review->setAuthorEmail(uniqid('test') . '@example.com');
+        $review->setAuthorEmail(uniqid('test').'@example.com');
 
         $this->em->persist($review);
         $this->em->flush();

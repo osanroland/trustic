@@ -14,7 +14,9 @@ class ReviewController extends AbstractController
 {
     private const REVIEWS_PER_PAGE = 10;
 
-    public function __construct(private readonly ReviewRepository $repository) {}
+    public function __construct(private readonly ReviewRepository $repository)
+    {
+    }
 
     #[Route('/', name: 'review_index')]
     public function index(Request $request): Response

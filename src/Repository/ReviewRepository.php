@@ -16,7 +16,7 @@ class ReviewRepository extends ServiceEntityRepository
 
     public function hasReviewFromEmail(string $email, string $companyName): bool
     {
-        return $this->createQueryBuilder('r')
+        return null !== $this->createQueryBuilder('r')
             ->select('1')
             ->where('r.authorEmail = :email')
             ->andWhere('r.companyName = :companyName')
@@ -24,12 +24,9 @@ class ReviewRepository extends ServiceEntityRepository
             ->setParameter('companyName', $companyName)
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult() !== null;
+            ->getOneOrNullResult();
     }
 
-    /**
-     * @return array
-     */
     public function getCompanyStatistics(): array
     {
         return $this->createQueryBuilder('r')
@@ -53,9 +50,9 @@ class ReviewRepository extends ServiceEntityRepository
             ->setFirstResult(($page - 1) * $limit)
             ->setMaxResults($limit);
 
-        if ($search !== null && $search !== '') {
+        if (null !== $search && '' !== $search) {
             $qb->andWhere('LOWER(r.companyName) LIKE LOWER(:search)')
-                ->setParameter('search', '%' . $search . '%');
+                ->setParameter('search', '%'.$search.'%');
         }
 
         return new Paginator($qb);

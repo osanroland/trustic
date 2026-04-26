@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueReviewValidator extends ConstraintValidator
 {
-    public function __construct(private readonly ReviewRepository $repository) {}
+    public function __construct(private readonly ReviewRepository $repository)
+    {
+    }
 
     public function validate(mixed $review, Constraint $constraint): void
     {
