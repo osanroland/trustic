@@ -40,6 +40,10 @@ class ReviewController extends AbstractController
     {
         $review = $this->repository->find($id);
 
+        if (null === $review) {
+            throw $this->createNotFoundException('A vélemény nem található.');
+        }
+
         return $this->render('review/details.html.twig', [
             'review' => $review,
         ]);
