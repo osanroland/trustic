@@ -30,6 +30,12 @@
     php bin/console doctrine:fixtures:load
     ```
 
+## Running the tests
+
+```bash
+php bin/phpunit
+```
+
 ## Running the application
 
 ```bash
@@ -37,3 +43,15 @@ symfony serve
 ```
 
 The application will be available at **https://127.0.0.1:8000**.
+
+---
+
+## Munkaidőnapló
+
+- **Tervezés és projekt setup** (tervezés  + terv validáicó AI-al, függőségek telpítése, alap setup +  seed): 0 – 1,5 óra
+- **Lista oldal, Új értékelés oldal** (repository, controllerek, keresés funkció) : 1,5 – 3,5 óra
+- **Értékelés részletek, Cégstatisztika**: 3,5 – 4 óra
+- **Bónusz:** (azonos email + cég ellenőrzés, pagináció): 4 - 4,5 óra
+- **Tesztek** : kb 4,5 - 5 óra
+
+**Összesen: ~ 5 óra**
