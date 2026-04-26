@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Review;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ReviewRepository extends ServiceEntityRepository
@@ -39,17 +40,24 @@ class ReviewRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
-    /** @return Review[] */
-    public function findAllOrderedByDate(?string $search = null): array
+    public function save(Review $review): void
+    {
+        $this->getEntityManager()->persist($review);
+        $this->getEntityManager()->flush();
+    }
+
+    public function findPaginatedList(int $page, int $limit, ?string $search = null): Paginator
     {
         $qb = $this->createQueryBuilder('r')
-            ->orderBy('r.createdAt', 'DESC');
+            ->orderBy('r.createdAt', 'DESC')
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit);
 
         if ($search !== null && $search !== '') {
             $qb->andWhere('LOWER(r.companyName) LIKE LOWER(:search)')
                 ->setParameter('search', '%' . $search . '%');
         }
 
-        return $qb->getQuery()->getResult();
+        return new Paginator($qb);
     }
 }

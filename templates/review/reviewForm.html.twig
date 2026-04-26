@@ -78,7 +78,6 @@
         }
     }
 
-    // Restore selected value on page load (e.g. after failed validation)
     const currentValue = parseInt(ratingInput.value);
     if (currentValue >= 1 && currentValue <= 5) {
         setStars(currentValue, false);

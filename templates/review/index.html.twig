@@ -51,4 +51,27 @@
             {% endfor %}
         </tbody>
     </table>
+
+    {% if totalPages > 1 %}
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item {{ currentPage == 1 ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ path('review_index', {page: currentPage - 1, search: search}) }}">«</a>
+                </li>
+
+                {% for p in 1..totalPages %}
+                    <li class="page-item {{ p == currentPage ? 'active' : '' }}">
+                        <a class="page-link" href="{{ path('review_index', {page: p, search: search}) }}"
+                           {% if p == currentPage %}style="background-color: #00a651; border-color: #00a651;"{% endif %}>
+                            {{ p }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                <li class="page-item {{ currentPage == totalPages ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ path('review_index', {page: currentPage + 1, search: search}) }}">»</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}
