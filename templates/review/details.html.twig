@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ review.companyName }} — Trustic{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <a href="{{ path('review_index') }}" class="btn btn-outline-secondary btn-sm mb-4">← Vissza a listára</a>
+
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Cégnév:</dt>
+                        <dd class="col-sm-9">{{ review.companyName }}</dd>
+
+                        <dt class="col-sm-3">Értékelés:</dt>
+                        <dd class="col-sm-9">
+                            {% for i in 1..5 %}
+                                <i class="bi bi-star{{ i <= review.rating ? '-fill' : '' }}" style="color: {{ i <= review.rating ? '#ffc107' : '#ccc' }};"></i>
+                            {% endfor %}
+                        </dd>
+
+                        <dt class="col-sm-3">Vélemény:</dt>
+                        <dd class="col-sm-9">{{ review.reviewText }}</dd>
+
+                        <dt class="col-sm-3">Szerző:</dt>
+                        <dd class="col-sm-9">{{ review.authorEmail }}</dd>
+
+                        <dt class="col-sm-3">Dátum:</dt>
+                        <dd class="col-sm-9">{{ review.createdAt|date('Y.m.d') }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

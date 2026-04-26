@@ -28,6 +28,7 @@
                 <th>Értékelés</th>
                 <th>Vélemény</th>
                 <th>Dátum</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -41,10 +42,11 @@
                     </td>
                     <td>{{ review.reviewText|length > 100 ? review.reviewText|slice(0, 100) ~ '…' : review.reviewText }}</td>
                     <td>{{ review.createdAt|date('Y.m.d') }}</td>
+                    <td><a href="{{ path('review_details', {id: review.id}) }}" class="btn btn-sm btn-outline-secondary">Részletek</a></td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4" class="text-center text-muted">Nincs találat.</td>
+                    <td colspan="5" class="text-center text-muted">Nincs találat.</td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -25,6 +25,16 @@ class ReviewController extends AbstractController
         ]);
     }
 
+    #[Route('/review/{id}/details', name: 'review_details', methods: ['GET'])]
+    public function details(int $id, ReviewRepository $repository): Response
+    {
+        $review = $repository->find($id) ?? throw $this->createNotFoundException('A vélemény nem található.');
+
+        return $this->render('review/details.html.twig', [
+            'review' => $review,
+        ]);
+    }
+
     #[Route('/review/add', name: 'review_add', methods: ['GET', 'POST'])]
     public function addReview(Request $request, EntityManagerInterface $em): Response
     {
