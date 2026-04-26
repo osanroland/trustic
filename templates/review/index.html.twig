@@ -22,7 +22,7 @@
     </div>
 
     <table class="table table-hover">
-        <thead class="table-dark">
+        <thead style="--bs-table-bg: #00a651; --bs-table-color: #fff; color: #fff;">
             <tr>
                 <th>Cég</th>
                 <th>Értékelés</th>
@@ -42,7 +42,7 @@
                     </td>
                     <td>{{ review.reviewText|length > 100 ? review.reviewText|slice(0, 100) ~ '…' : review.reviewText }}</td>
                     <td>{{ review.createdAt|date('Y.m.d') }}</td>
-                    <td><a href="{{ path('review_details', {id: review.id}) }}" class="btn btn-sm btn-outline-secondary">Részletek</a></td>
+                    <td><a href="{{ path('review_details', {id: review.id}) }}" class="btn btn-sm" style="color: #00a651; border-color: #00a651;">Részletek</a></td>
                 </tr>
             {% else %}
                 <tr>
