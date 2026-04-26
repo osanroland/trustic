@@ -13,6 +13,19 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
+    public function hasReviewFromEmail(string $email, string $companyName): bool
+    {
+        return $this->createQueryBuilder('r')
+            ->select('1')
+            ->where('r.authorEmail = :email')
+            ->andWhere('r.companyName = :companyName')
+            ->setParameter('email', $email)
+            ->setParameter('companyName', $companyName)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult() !== null;
+    }
+
     /**
      * @return array
      */

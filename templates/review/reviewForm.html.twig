@@ -8,6 +8,14 @@
             <h1 class="h3 mb-4">Új értékelés</h1>
 
             {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                {% if form.vars.errors|length %}
+                    <div class="alert alert-danger">
+                        {% for error in form.vars.errors %}
+                            {{ error.message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <div class="mb-3">
                     {{ form_label(form.companyName) }}
                     {{ form_widget(form.companyName, {attr: {class: 'form-control' ~ (form.companyName.vars.errors|length ? ' is-invalid' : '')}}) }}
