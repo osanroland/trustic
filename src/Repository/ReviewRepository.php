@@ -15,4 +15,18 @@ class ReviewRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Review::class);
     }
+
+    /** @return Review[] */
+    public function findAllOrderedByDate(?string $search = null): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC');
+
+        if ($search !== null && $search !== '') {
+            $qb->andWhere('LOWER(r.companyName) LIKE LOWER(:search)')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }
