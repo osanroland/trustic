@@ -12,7 +12,11 @@
         <nav class="navbar navbar-dark bg-dark mb-4">
             <div class="container" style="max-width: 70%;">
                 <a class="navbar-brand fw-bold" href="{{ path('review_index') }}">Trustic</a>
-                <a href="{{ path('company_index') }}" class="nav-link text-white">Cégek</a>
+                <div class="d-flex gap-3">
+                    <a href="{{ path('review_index') }}" class="nav-link text-white">Értékelések</a>
+                    <a href="{{ path('company_index') }}" class="nav-link text-white">Cégek</a>
+                    <a href="{{ path('review_add') }}" class="nav-link text-white">Új értékelés</a>
+                </div>
             </div>
         </nav>
 
